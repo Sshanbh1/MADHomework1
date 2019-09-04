@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">homework1</string>
+    <string name="bmi_title">Body Mass Index (BMI)</string>
+    <string name="weight">Weight</string>
+    <string name="height">Height</string>
+    <string name="ewlb">Enter Weight</string>
+    <string name="ehf">Feet</string>
+    <string name="ehi">Inches</string>
+    <string name="calculate">Calculate BMI</string>
+    <string name="underweight">You are Underweight</string>
+    <string name="normalweight">You are Normal Weight</string>
+    <string name="overweight">You are Overweight</string>
+    <string name="obese">You are Obese</string>
+    <string name="dmi">Your BMI is :</string>
+    <string name="validval">Enter Valid Values</string>
+</resources>
