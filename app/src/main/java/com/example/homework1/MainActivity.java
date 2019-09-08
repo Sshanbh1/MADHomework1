@@ -38,12 +38,14 @@ public class MainActivity extends AppCompatActivity {
         et_inches = findViewById(R.id.et_inches);
         calc_btn = findViewById(R.id.calc_btn);
 
-        tv_bmi.setText("");
-        tv_bmires.setText("");
+
 
         calc_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+
+                tv_bmi.setText("");
+                tv_bmires.setText("");
 
                 String tempLen1 = et_weight.getText().toString();
 
@@ -52,9 +54,11 @@ public class MainActivity extends AppCompatActivity {
                 String tempLen3 = et_inches.getText().toString();
 
                 if(tempLen1.equals("") || !isNumeric(tempLen1)){
-                    et_weight.setError("Please Enter a Appropriate Value");
+
                     tv_bmi.setText(getString(R.string.validval));
                     tv_bmires.setText("");
+                    et_weight.setError("Please Enter a Appropriate Value");
+
                 } else {
                     weight = Float.parseFloat(tempLen1);
                 }
