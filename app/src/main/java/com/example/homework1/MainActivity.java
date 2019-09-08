@@ -89,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
                     tv_bmires.setText(getString(R.string.obese));
                 }
 
+                InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
                 Toast.makeText(getApplicationContext(),"BMI Calculated",Toast.LENGTH_SHORT).show();
 
             }
