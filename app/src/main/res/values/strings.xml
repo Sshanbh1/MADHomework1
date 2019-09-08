@@ -13,4 +13,5 @@
     <string name="obese">You are Obese</string>
     <string name="dmi">Your BMI is :</string>
     <string name="validval">Enter Valid Values</string>
+    <string name="lb">lb</string>
 </resources>
