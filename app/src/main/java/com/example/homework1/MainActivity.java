@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle("BMI Calculator");
 
+        //Get all view fields into variables
         tv_bmi = findViewById(R.id.tv_bmi);
         tv_bmires = findViewById(R.id.tv_bmires);
         et_weight = findViewById(R.id.et_weight);
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         calc_btn = findViewById(R.id.calc_btn);
 
 
-
+        //Set OnCLick event listener on 'calc_btn'
         calc_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -47,34 +48,55 @@ public class MainActivity extends AppCompatActivity {
                 tv_bmi.setText("");
                 tv_bmires.setText("");
 
-                String tempLen1 = et_weight.getText().toString();
+                int showResults = 0;    //showResults is used to determine if the result is to be displayed or not. If all input fields are valid show results, else not.
 
-                String tempLen2 = et_feet.getText().toString();
+                String tempWeight = et_weight.getText().toString();
 
-                String tempLen3 = et_inches.getText().toString();
+                String tempFeet = et_feet.getText().toString();
 
-                if(tempLen1.equals("") || !isNumeric(tempLen1)){
+                String tempInch = et_inches.getText().toString();
+
+                if(tempWeight.equals("") || !isNumeric(tempWeight)){
 
                     tv_bmi.setText(getString(R.string.validval));
                     tv_bmires.setText("");
                     et_weight.setError("Please Enter a Appropriate Value");
+                    showResults = -1;
 
                 } else {
-                    weight = Float.parseFloat(tempLen1);
+                    weight = Float.parseFloat(tempWeight);
+                    showResults++;
                 }
-                if(tempLen2.equals("") || !isNumeric(tempLen2)){
+                if(tempFeet.equals("") || !isNumeric(tempFeet)){
                     et_feet.setError("Please Enter a Appropriate Value");
                     tv_bmi.setText(getString(R.string.validval));
                     tv_bmires.setText("");
+                    showResults = -1;
                 } else {
-                    feet = Integer.parseInt(tempLen2);
+                    try{
+                        feet = Integer.parseInt(tempFeet);
+                        showResults++;
+                    }catch (Exception e){
+                        Toast.makeText(getApplicationContext(),"Invalid inputs.",Toast.LENGTH_SHORT).show();
+                        showResults = -1;
+                    }
+
                 }
-                if(tempLen3.equals("") || !isNumeric(tempLen3)){
+                if(tempInch.equals("") || !isNumeric(tempInch)){
                     et_inches.setError("Please Enter a Appropriate Value");
                     tv_bmi.setText(getString(R.string.validval));
                     tv_bmires.setText("");
+                    showResults = -1;
                 } else {
-                    inches = Integer.parseInt(tempLen3);
+                    try{
+                        inches = Integer.parseInt(tempInch);
+                        showResults++;
+                    }
+                    catch (Exception e){
+                        Toast.makeText(getApplicationContext(),"Invalid inputs.",Toast.LENGTH_SHORT).show();
+                        showResults = -1;
+                    }
+
                 }
 
                 double finalHeight = inches + (feet * 12);
@@ -93,10 +115,27 @@ public class MainActivity extends AppCompatActivity {
                     tv_bmires.setText(getString(R.string.obese));
                 }
 
-                InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                //Hide keyboard after the results are displayed
+                try{
+                    InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
-                Toast.makeText(getApplicationContext(),"BMI Calculated",Toast.LENGTH_SHORT).show();
+                }catch (Exception e)
+                {
+
+                }
+
+                //Show toaster if all fields are valid.
+                if(showResults>=2)
+                {
+                    Toast.makeText(getApplicationContext(),"BMI Calculated",Toast.LENGTH_SHORT).show();
+                }
+                else    //Else remove all previous result text
+                {
+                    tv_bmi.setText("");
+                    tv_bmires.setText("");
+                }
+
 
             }
         });
